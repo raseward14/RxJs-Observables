@@ -14,5 +14,9 @@ export class AppComponent implements OnInit {
     const subscription = interval(1000).subscribe({
       next: (val) => console.log(val)
     });
+
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
   }
 }
