@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   customInterval$ = new Observable((subscriber) => {
     let timesExecuted = 0;
     const interval = setInterval(() => {
+      subscriber.error();
       if (timesExecuted > 5) {
         clearInterval(interval);
         subscriber.complete();
@@ -60,7 +61,8 @@ export class AppComponent implements OnInit {
     //   });
     this.customInterval$.subscribe({
       next: (val) => console.log(val),
-      complete: () => console.log('Completed')
+      complete: () => console.log('Completed'),
+      error: (val) => console.log(val)
     });
     const subscription = this.clickCount$.subscribe({
       next: (val) => console.log(`Clicked ${this.clickCount()} times.`)
