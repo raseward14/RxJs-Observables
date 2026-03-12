@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
-import { interval, map } from "rxjs";
+import { interval, map, Observable } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -23,6 +23,9 @@ export class AppComponent implements OnInit {
   intervalSignal = toSignal(this.interval$, { initialValue: 0 });
   // interval = signal(0);
   // doubleInterval = computed(() => this.interval() * 2);
+  customInterval$ = new Observable((subscriber) => {
+    setInterval(() => {}, 2000);
+  });
   private destroyRef = inject(DestroyRef);
 
   constructor() {
